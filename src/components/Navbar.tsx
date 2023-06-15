@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <BootNav className="bg-white shadow-sm mb-3">
+    <BootNav sticky="top" className="bg-white shadow-sm mb-3">
       <Container>
         <Nav className="me-auto">
           <Nav.Link to={"/"} as={NavLink}>
@@ -41,6 +41,7 @@ function Navbar() {
               position: "absolute",
               bottom: 0,
               right: 0,
+              transform: "translate(40%, 40%)",
             }}
           >
             1
