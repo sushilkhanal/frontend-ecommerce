@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useShoppingCart } from "../Context/ShoppingCartContext";
-import storeItems from "../data/items.json";
+import axios from "axios";
 import { Button, Stack } from "react-bootstrap";
 import FormatCurrency from "../utilities/FormatCurrency";
 
-type CartItemPropes = {
+type CartItemProps = {
   id: number;
   quantity: number;
 };
-function CartItem({ id, quantity }: CartItemPropes) {
+
+type Item = {
+  id: number;
+  url: string;
+  name: string;
+  price: number;
+};
+
+function CartItem({ id, quantity }: CartItemProps) {
   const { removeFromCart } = useShoppingCart();
-  const item = storeItems.find((i) => i.id === id);
-  if (item == null) return null;
+  const [item, setItem] = useState<Item | null>(null);
+
+  useEffect(() => {
+    fetchItemData();
+  }, []);
+
+  const fetchItemData = async () => {
+    try {
+      const response = await axios.get<Item>(
+        `http://localhost:8080/items/${id}` // Update the endpoint to fetch item data
+      );
+      const itemData = response.data;
+      setItem(itemData);
+    } catch (error) {
+      console.log("Error fetching item data:", error);
+    }
+  };
+
+  if (!item) {
+    return null;
+  }
+
+  const totalItemPrice = item.price * quantity;
+
   return (
     <Stack direction="horizontal" gap={2} className="d-flex align-item-center">
       <img
-        src={item.imgUrl}
+        src={item.url}
         style={{ width: "125px", height: "75px", objectFit: "cover" }}
       />
       <div className="me-auto">
@@ -32,7 +62,7 @@ function CartItem({ id, quantity }: CartItemPropes) {
           {FormatCurrency(item.price)}
         </div>
       </div>
-      <div>{FormatCurrency(item.price * quantity)}</div>
+      <div>{FormatCurrency(totalItemPrice)}</div>
       <Button
         variant="outline-danger"
         size="sm"

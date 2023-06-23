@@ -1,6 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-function Sidebar(props) {
+type SidebarProps = {
+  children: ReactNode;
+};
+
+function Sidebar({ children }: SidebarProps) {
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
       <div className="position-sticky">
@@ -57,7 +61,7 @@ function Sidebar(props) {
           </a>
         </div>
       </div>
-      <div>{props.children}</div>
+      <div>{children}</div>
     </div>
   );
 }

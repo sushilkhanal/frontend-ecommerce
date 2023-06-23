@@ -7,6 +7,7 @@ type ShoppingCartProviderProps = {
 };
 
 type CartItem = {
+  price: number;
   id: number;
   quantity: number;
 };
@@ -102,4 +103,4 @@ function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   );
 }
 
-export { useShoppingCart, ShoppingCartProvider, ShoppingCartContext };
+export { useShoppingCart, ShoppingCartProvider };

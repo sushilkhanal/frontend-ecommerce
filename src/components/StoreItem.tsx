@@ -28,13 +28,15 @@ function StoreItem({ id, name, price, url }: StoreItemProps) {
 
   const fetchItemData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/items");
+      const response = await axios.get<StoreItemProps[]>(
+        "http://localhost:8080/items"
+      );
       // Assuming the response data is an array of items
       // You may need to adjust the data structure based on your backend response
       const items = response.data;
 
       // Find the item with the matching ID
-      const item = items.find((item: StoreItemProps) => item.id === id);
+      const item = items.find((item) => item.id === id);
 
       // Update the item data
       if (item) {
@@ -60,7 +62,7 @@ function StoreItem({ id, name, price, url }: StoreItemProps) {
         variant="top"
         src={url}
         height="400px"
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "contain" }}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
