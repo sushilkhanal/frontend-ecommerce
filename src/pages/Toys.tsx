@@ -11,18 +11,18 @@ type Item = {
   category: string;
 };
 
-function Electronics() {
+function Toys() {
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
     axios
       .get<Item[]>("http://localhost:8080/items")
       .then((response) => {
-        const electronicsItems = response.data.filter((item) => {
-          return item.category === "Electronics";
+        const toysItems = response.data.filter((item) => {
+          return item.category === "Toys";
         });
-        setItems(electronicsItems);
-        console.log(electronicsItems);
+        setItems(toysItems);
+        console.log(toysItems);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -31,7 +31,7 @@ function Electronics() {
 
   return (
     <>
-      <h1>Electronics</h1>
+      <h1>Toys</h1>
       <Row md={2} xs={1} lg={3} className="g-3">
         {items.map((item) => (
           <Col key={item.id}>
@@ -48,4 +48,4 @@ function Electronics() {
   );
 }
 
-export default Electronics;
+export default Toys;

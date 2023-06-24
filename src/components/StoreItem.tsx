@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import FormatCurrency from "../utilities/FormatCurrency";
 import { useShoppingCart } from "../Context/ShoppingCartContext";
@@ -11,7 +11,7 @@ type StoreItemProps = {
   url: string;
 };
 
-function StoreItem({ id, name, price, url }: StoreItemProps) {
+const StoreItem: React.FC<StoreItemProps> = ({ id, name, price, url }) => {
   const {
     getItemQuantity,
     increaseCartQuantity,
@@ -21,6 +21,9 @@ function StoreItem({ id, name, price, url }: StoreItemProps) {
   const quantity = getItemQuantity(id);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [itemName, setItemName] = useState("");
+  const [itemPrice, setItemPrice] = useState(0);
+  const [itemUrl, setItemUrl] = useState("");
 
   useEffect(() => {
     fetchItemData();
@@ -31,18 +34,14 @@ function StoreItem({ id, name, price, url }: StoreItemProps) {
       const response = await axios.get<StoreItemProps[]>(
         "http://localhost:8080/items"
       );
-      // Assuming the response data is an array of items
-      // You may need to adjust the data structure based on your backend response
       const items = response.data;
 
-      // Find the item with the matching ID
       const item = items.find((item) => item.id === id);
 
-      // Update the item data
       if (item) {
-        setName(item.name);
-        setPrice(item.price);
-        setUrl(item.url);
+        setItemName(item.name);
+        setItemPrice(item.price);
+        setItemUrl(item.url);
       }
 
       setIsLoading(false);
@@ -60,14 +59,14 @@ function StoreItem({ id, name, price, url }: StoreItemProps) {
     <Card className="h-100">
       <Card.Img
         variant="top"
-        src={url}
+        src={itemUrl}
         height="400px"
         style={{ objectFit: "contain" }}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
-          <span className="fs-2">{name}</span>
-          <span className="ms-2 text-muted">{FormatCurrency(price)}</span>
+          <span className="fs-2">{itemName}</span>
+          <span className="ms-2 text-muted">{FormatCurrency(itemPrice)}</span>
         </Card.Title>
         <div className="mt-auto">
           {quantity === 0 ? (
@@ -102,6 +101,6 @@ function StoreItem({ id, name, price, url }: StoreItemProps) {
       </Card.Body>
     </Card>
   );
-}
+};
 
 export default StoreItem;

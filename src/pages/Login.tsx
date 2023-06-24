@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function LoginForm() {
+function LoginForm(): JSX.Element {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
     try {
@@ -28,21 +30,21 @@ function LoginForm() {
 
         // Perform any necessary actions upon successful login
         alert("Login successful");
-        // navigate("/");
 
         // Reset form fields and error message
         setUsername("");
         setPassword("");
         setErrorMessage("");
+
+        // Redirect to the Items page
+        navigate("/item");
       } else {
-        setError("Invalid username or password");
+        setErrorMessage("Invalid username or password");
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setError("Invalid username or password");
-      } else {
-        setError("An error occurred during login. Please try again.");
-      }
+      error.response && error.response.status === 401
+        ? setErrorMessage("Invalid username or password")
+        : setErrorMessage("An error occurred during login. Please try again.");
     }
   };
 

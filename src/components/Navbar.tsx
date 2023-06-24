@@ -19,50 +19,47 @@ function Navbar() {
   };
 
   return (
-    <BootNav
-      sticky="top"
-      className="bg-white shadow-sm mb-3 justify-content-between"
-    >
-      <Container className="flex justify-center">
-        <Nav className="me-auto">
+    <BootNav sticky="top" className="bg-white shadow-sm mb-3">
+      <Container className="d-flex justify-content-between align-items-center">
+        <Nav className="mr-auto">
           <Nav.Link to={"/"} as={NavLink}>
             Home
           </Nav.Link>
-          <NavDropdown title="Login" id="login-dropdown">
+          <Nav.Link to={"/item"} as={NavLink}>
+            Item
+          </Nav.Link>
+        </Nav>
+        <form className="form-inline">
+          <div className="input-group">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+        <Nav>
+          <NavDropdown title="Account" id="account-dropdown">
             <NavDropdown.Item to={"/login"} as={NavLink}>
               Login
             </NavDropdown.Item>
-            {/* Add the "Wishlist" option to the dropdown */}
             <NavDropdown.Item to={"/wishlist"} as={NavLink}>
               Wishlist
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            {/* Conditionally show "Logout" if the user is logged in */}
             {isLoggedIn && (
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             )}
           </NavDropdown>
-          <Nav.Link to={"/item"} as={NavLink}>
-            Item
-          </Nav.Link>
-          <form className="form-inline">
-            <div className="input-group">
-              <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <div className="input-group-append">
-                <button
-                  className="btn btn-outline-success my-2 my-sm-0"
-                  type="submit"
-                >
-                  Search
-                </button>
-              </div>
-            </div>
-          </form>
         </Nav>
         {cartQuantity > 0 && (
           <Button
