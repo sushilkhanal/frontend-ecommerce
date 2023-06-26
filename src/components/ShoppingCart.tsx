@@ -1,5 +1,6 @@
 import React from "react";
-import { Offcanvas, Stack } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Offcanvas, Stack, Button } from "react-bootstrap";
 import { useShoppingCart } from "../Context/ShoppingCartContext";
 import CartItem from "./CartItem";
 import FormatCurrency from "../utilities/FormatCurrency";
@@ -20,6 +21,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen }) => {
   const { closeCart, cartItems } = useShoppingCart();
   const [storeItems, setStoreItems] = React.useState<StoreItem[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     fetchStoreItems();
@@ -37,6 +39,14 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen }) => {
       console.log("Error fetching store items:", error);
       setIsLoading(false);
     }
+  };
+
+  const handleCheckout = () => {
+    // Perform any necessary actions before navigating to the checkout page
+    // For example, you can save the cart items to a database or perform a payment process
+
+    // Navigate to the checkout page
+    navigate("/checkout");
   };
 
   if (isLoading) {
@@ -72,6 +82,14 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen }) => {
               }, 0)
             )}
           </div>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={handleCheckout}
+            className="mt-3"
+          >
+            Checkout
+          </Button>
         </Stack>
       </Offcanvas.Body>
     </Offcanvas>

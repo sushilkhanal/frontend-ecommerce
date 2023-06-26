@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import FormatCurrency from "../utilities/FormatCurrency";
 import { useShoppingCart } from "../Context/ShoppingCartContext";
+import { useWishlist } from "../Context/WishlistContext";
 import axios from "axios";
 
 type StoreItemProps = {
@@ -18,6 +19,7 @@ const StoreItem: React.FC<StoreItemProps> = ({ id, name, price, url }) => {
     decreaseCartQuantity,
     removeFromCart,
   } = useShoppingCart();
+  const { addToWishlist, removeFromWishlist, wishlistItems } = useWishlist();
   const quantity = getItemQuantity(id);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -51,6 +53,16 @@ const StoreItem: React.FC<StoreItemProps> = ({ id, name, price, url }) => {
     }
   };
 
+  const handleAddToWishlist = () => {
+    addToWishlist(id);
+    alert("Item added to wishlist");
+  };
+
+  const handleRemoveFromWishlist = () => {
+    removeFromWishlist(id);
+    alert("Item removed from wishlist");
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -70,9 +82,19 @@ const StoreItem: React.FC<StoreItemProps> = ({ id, name, price, url }) => {
         </Card.Title>
         <div className="mt-auto">
           {quantity === 0 ? (
-            <Button className="w-100" onClick={() => increaseCartQuantity(id)}>
-              + Add To Cart
-            </Button>
+            <div className="d-flex">
+              <Button className="me-2" onClick={() => increaseCartQuantity(id)}>
+                + Add To Cart
+              </Button>
+              {!wishlistItems.includes(id) && (
+                <Button onClick={handleAddToWishlist}>Add To Wishlist</Button>
+              )}
+              {wishlistItems.includes(id) && (
+                <Button onClick={handleRemoveFromWishlist}>
+                  Remove From Wishlist
+                </Button>
+              )}
+            </div>
           ) : (
             <div
               className="d-flex align-items-center flex-column"

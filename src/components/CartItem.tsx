@@ -3,6 +3,7 @@ import { useShoppingCart } from "../Context/ShoppingCartContext";
 import axios from "axios";
 import { Button, Stack } from "react-bootstrap";
 import FormatCurrency from "../utilities/FormatCurrency";
+import { useNavigate } from "react-router-dom";
 
 type CartItemProps = {
   id: number;
@@ -19,6 +20,7 @@ type Item = {
 function CartItem({ id, quantity }: CartItemProps) {
   const { removeFromCart } = useShoppingCart();
   const [item, setItem] = useState<Item | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchItemData();
@@ -41,6 +43,14 @@ function CartItem({ id, quantity }: CartItemProps) {
   }
 
   const totalItemPrice = item.price * quantity;
+
+  const handleCheckout = () => {
+    // Perform any necessary actions before navigating to the checkout page
+    // For example, you can save the cart items to a database or perform a payment process
+
+    // Navigate to the checkout page
+    navigate("/checkout");
+  };
 
   return (
     <Stack direction="horizontal" gap={2} className="d-flex align-item-center">

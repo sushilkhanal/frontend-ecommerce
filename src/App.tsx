@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Home from "./pages/Home";
@@ -12,13 +13,19 @@ import HomeAndKitchen from "./pages/HomeAndKitchen";
 import Stationery from "./pages/Stationery";
 import Toys from "./pages/Toys";
 import Books from "./pages/Books";
-import Wishlist from "./pages/Wishlist";
+import Wishlist from "./components/Wishlist";
+import Checkout from "./pages/Checkout";
+import { AuthContext } from "./AuthProvider";
 
-function App() {
+function App(): JSX.Element {
+  const { authState } = useContext(AuthContext);
+  const isLoggedIn = authState.token !== "";
+
   return (
     <ShoppingCartProvider>
       <Navbar />
-      <Sidebar>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {isLoggedIn && <Sidebar children={undefined} />}
         <Container className="mb-4">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -31,9 +38,10 @@ function App() {
             <Route path="/stationery" element={<Stationery />} />
             <Route path="/toys" element={<Toys />} />
             <Route path="/books" element={<Books />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </Container>
-      </Sidebar>
+      </div>
     </ShoppingCartProvider>
   );
 }
