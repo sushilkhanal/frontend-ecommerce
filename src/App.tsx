@@ -12,6 +12,7 @@ import HomeAndKitchen from "./pages/HomeAndKitchen";
 import Stationery from "./pages/Stationery";
 import Toys from "./pages/Toys";
 import Books from "./pages/Books";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/item" element={<Item />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/electronics" element={<Electronics />} />
             <Route path="/clothing" element={<Clothing />} />
             <Route path="/homeandkitchen" element={<HomeAndKitchen />} />

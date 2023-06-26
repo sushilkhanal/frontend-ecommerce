@@ -13,8 +13,10 @@ interface AuthContextProps {
 
 export const AuthContext = createContext<AuthContextProps>({
   authState: { token: "", username: "", userId: "" },
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setAuthState: () => {},
+  setAuthState: () => {
+    // Provide a default implementation if needed
+    console.warn("setAuthState is not implemented");
+  },
 });
 
 interface AuthProviderProps {
