@@ -48,7 +48,7 @@ const LoginForm: React.FC = (): JSX.Element => {
       );
 
       if (response.status === 200) {
-        const { authorization, username, userId } = response.data;
+        const { authorization, username, userId, role } = response.data;
 
         // Save the token and username in local storage
         localStorage.setItem("token", authorization);
@@ -80,9 +80,13 @@ const LoginForm: React.FC = (): JSX.Element => {
           .catch((error) => {
             console.log("Error fetching cart data:", error);
           });
-
+        if (role === "admin") {
+          navigate("/dashboard");
+        } else {
+          navigate("/");
+        }
         // Redirect to the Items page and reload after a small delay
-        navigate("/item");
+        // navigate("/item");
         setTimeout(() => {
           window.location.reload();
         }, 100);

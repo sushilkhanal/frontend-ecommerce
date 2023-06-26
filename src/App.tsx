@@ -16,6 +16,7 @@ import Books from "./pages/Books";
 import Wishlist from "./components/Wishlist";
 import Checkout from "./pages/Checkout";
 import { AuthContext } from "./AuthProvider";
+import Dashboard from "./pages/Dashboard";
 
 function App(): JSX.Element {
   const { authState } = useContext(AuthContext);
@@ -29,6 +30,7 @@ function App(): JSX.Element {
         <Container className="mb-4">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/item" element={<Item />} />
             <Route path="/wishlist" element={<Wishlist />} />

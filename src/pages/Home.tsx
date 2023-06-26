@@ -13,7 +13,11 @@ function Home() {
           muted
           loop
           className="video"
-          style={{ width: "1200px", height: "700px", objectFit: "cover" }}
+          style={{
+            width: "100%",
+            height: "calc(100vh - 50px)",
+            objectFit: "cover",
+          }}
         >
           <source
             src="https://www.apple.com/105/media/in/iphone-14-pro/2023/b094f6e4-dcdb-494f-bd72-45d659126dcd/anim/hero/large.mp4"
