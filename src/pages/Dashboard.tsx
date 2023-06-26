@@ -11,7 +11,7 @@ interface ItemData {
 }
 
 interface UserData {
-  username: string;
+  userName: string;
   email: string;
   password: string;
   role: string;
@@ -27,7 +27,7 @@ function Dashboard() {
   });
 
   const [userData, setUserData] = useState<UserData>({
-    username: "",
+    userName: "",
     email: "",
     password: "",
     role: "",
@@ -71,7 +71,7 @@ function Dashboard() {
       .then((response) => {
         setSuccessMessage("User added successfully");
         setUserData({
-          username: "",
+          userName: "",
           email: "",
           password: "",
           role: "",
@@ -163,12 +163,12 @@ function Dashboard() {
 
         <Col>
           <Form onSubmit={handleAddUserSubmit}>
-            <Form.Group controlId="username">
+            <Form.Group controlId="userName">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                name="username"
-                value={userData.username}
+                name="userName"
+                value={userData.userName}
                 onChange={handleUserInputChange}
                 placeholder="Enter username"
                 required

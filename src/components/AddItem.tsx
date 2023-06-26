@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
 
-const AddItemForm = ({ show, handleClose }) => {
-  const [productData, setProductData] = useState({
+interface ProductData {
+  name: string;
+  price: string;
+}
+
+interface AddItemFormProps {
+  show: boolean;
+  handleClose: () => void;
+}
+
+const AddItemForm: React.FC<AddItemFormProps> = ({ show, handleClose }) => {
+  const [productData, setProductData] = useState<ProductData>({
     name: "",
     price: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.post(
