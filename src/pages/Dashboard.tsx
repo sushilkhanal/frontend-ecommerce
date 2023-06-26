@@ -155,7 +155,7 @@ function Dashboard() {
                 <option value="Books">Books</option>
               </Form.Control>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className="my-2" variant="primary" type="submit">
               Add Item
             </Button>
           </Form>
@@ -210,7 +210,7 @@ function Dashboard() {
                 <option value="User">User</option>
               </Form.Control>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className="my-2" variant="primary" type="submit">
               Add User
             </Button>
           </Form>

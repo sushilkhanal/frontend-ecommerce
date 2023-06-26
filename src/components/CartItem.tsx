@@ -56,7 +56,7 @@ function CartItem({ id, quantity }: CartItemProps) {
     <Stack direction="horizontal" gap={2} className="d-flex align-item-center">
       <img
         src={item.url}
-        style={{ width: "125px", height: "75px", objectFit: "cover" }}
+        style={{ width: "125px", height: "75px", objectFit: "contain" }}
       />
       <div className="me-auto">
         <div>

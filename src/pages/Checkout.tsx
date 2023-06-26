@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBBtn,
   MDBCard,
@@ -10,6 +10,19 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function Checkout() {
+  const [cardHolderName, setCardHolderName] = useState("Anna Doe");
+  const [cardNumber, setCardNumber] = useState("1234 5678 1234 5678");
+
+  const handleCardHolderNameChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCardHolderName(e.target.value);
+  };
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardNumber(e.target.value);
+  };
+
   return (
     <MDBContainer
       className="py-5"
@@ -42,6 +55,7 @@ export default function Checkout() {
                       type="text"
                       size="lg"
                       value="**** **** **** 3193"
+                      readOnly
                     />
                   </div>
                 </div>
@@ -61,6 +75,7 @@ export default function Checkout() {
                       type="text"
                       size="lg"
                       value="**** **** **** 4296"
+                      readOnly
                     />
                   </div>
                 </div>
@@ -72,16 +87,17 @@ export default function Checkout() {
                 id="form3"
                 type="text"
                 size="lg"
-                value="Anna Doe"
+                value={cardHolderName}
+                onChange={handleCardHolderNameChange}
               />
               <MDBRow className="my-4">
                 <MDBCol size="7">
-                  <MDBInput
-                    label="Card Number"
-                    id="form4"
+                  <input
+                    className="form-control form-control-lg"
                     type="text"
-                    size="lg"
-                    value="1234 5678 1234 5678"
+                    value={cardNumber}
+                    onChange={handleCardNumberChange}
+                    placeholder="Card Number"
                   />
                 </MDBCol>
                 <MDBCol size="3">
