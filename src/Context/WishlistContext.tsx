@@ -8,7 +8,9 @@ type WishlistContextType = {
 
 const WishlistContext = createContext<WishlistContextType>({
   wishlistItems: [],
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   addToWishlist: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   removeFromWishlist: () => {},
 });
 

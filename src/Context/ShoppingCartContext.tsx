@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode, useState } from "react";
 import ShoppingCart from "../components/ShoppingCart";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -50,16 +50,15 @@ function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   function increaseCartQuantity(id: number) {
     setCartItems((currItems) => {
-      if (currItems.find((item) => item.id === id) === undefined) {
-        return [...currItems, { id, quantity: 1 }];
+      const existingItem = currItems.find((item) => item.id === id);
+      if (existingItem !== undefined) {
+        // Increase quantity of existing item
+        return currItems.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        );
       } else {
-        return currItems.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
+        // Add new item to cart with quantity of 1
+        return [...currItems, { id, quantity: 1, price: 0 }];
       }
     });
   }

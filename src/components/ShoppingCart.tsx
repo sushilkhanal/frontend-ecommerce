@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Offcanvas, Stack, Button } from "react-bootstrap";
 import { useShoppingCart } from "../Context/ShoppingCartContext";
@@ -23,7 +23,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen }) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchStoreItems();
   }, []);
 
@@ -42,10 +42,6 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ isOpen }) => {
   };
 
   const handleCheckout = () => {
-    // Perform any necessary actions before navigating to the checkout page
-    // For example, you can save the cart items to a database or perform a payment process
-
-    // Navigate to the checkout page
     navigate("/checkout");
   };
 

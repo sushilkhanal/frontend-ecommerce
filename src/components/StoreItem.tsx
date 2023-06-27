@@ -7,9 +7,9 @@ import axios from "axios";
 
 type StoreItemProps = {
   id: number;
-  name: string;
-  price: number;
-  url: string;
+  name?: string;
+  price?: number;
+  url?: string;
 };
 
 const StoreItem: React.FC<StoreItemProps> = ({ id, name, price, url }) => {
@@ -41,9 +41,15 @@ const StoreItem: React.FC<StoreItemProps> = ({ id, name, price, url }) => {
       const item = items.find((item) => item.id === id);
 
       if (item) {
-        setItemName(item.name);
-        setItemPrice(item.price);
-        setItemUrl(item.url);
+        if (item.name) {
+          setItemName(item.name);
+        }
+        if (item.price) {
+          setItemPrice(item.price);
+        }
+        if (item.url) {
+          setItemUrl(item.url);
+        }
       }
 
       setIsLoading(false);

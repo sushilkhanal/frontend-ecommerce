@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 type CartItemProps = {
   id: number;
   quantity: number;
+  name: string;
+  price: number;
+  url: string;
 };
 
 type Item = {

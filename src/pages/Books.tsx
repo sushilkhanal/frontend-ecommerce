@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Col, Row } from "react-bootstrap";
 import StoreItem from "../components/StoreItem";

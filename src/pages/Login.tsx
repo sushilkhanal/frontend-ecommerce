@@ -94,11 +94,9 @@ const LoginForm: React.FC = (): JSX.Element => {
         setErrorMessage("Invalid username or password");
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage("Invalid username or password");
-      } else {
-        setErrorMessage("An error occurred during login. Please try again.");
-      }
+      error.response && error.response.status === 401
+        ? setErrorMessage("Invalid username or password")
+        : setErrorMessage("An error occurred during login. Please try again.");
     }
   };
 
